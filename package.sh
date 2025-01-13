@@ -39,8 +39,8 @@ CHECKROOT
 dnf list installed mysql-server &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    dnf install nodejs -y &>>$LOGFILE
-    VALIDATION $? "Installing nodejs"
+    dnf install mysql-server -y &>>$LOGFILE
+    VALIDATION $? "Installing mysql"
     systemctl enable mysqld &>>$LOGFILE
     systemctl start mysqld  &>>$LOGFILE
     if [$? -ne 0]
