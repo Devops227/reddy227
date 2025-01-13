@@ -44,7 +44,7 @@ CHECKROOT
     systemctl start mysqld  &>>$LOGFILE
     VALIDATION $? "Starting mysql service service"
     
-    mysql -h 54.174.92.98 -u root -pExpenseApp@1 -e 'show databases;'  
+    mysql -h 172.31.95.236 -u root -pExpenseApp@1 -e 'show databases;'  
     
     if [ $? -ne 0 ]
     then
