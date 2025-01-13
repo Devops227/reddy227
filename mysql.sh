@@ -34,9 +34,9 @@ echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 
 CHECKROOT
 
-dnf list installed mysql-server &>>$LOGFILE
-if [ $? -ne 0 ]
-then
+#dnf list installed mysql-server &>>$LOGFILE
+#if [ $? -ne 0 ]
+#then
     dnf install mysql-server -y &>>$LOGFILE
     VALIDATION $? "Installing mysql service"
     systemctl enable mysqld &>>$LOGFILE
@@ -44,6 +44,11 @@ then
     systemctl start mysqld  &>>$LOGFILE
     VALIDATION $? "Starting mysql service service"
     mysql_secure_installation --set-root-passExpenseApp@1 "setting up root password"
-else 
-   echo -e " $Y mysql service already installed$N"
-fi
+    if [ $? -ne 0 ]
+    then
+       echo -n " $Y root password already configured$N"
+    else 
+       echo -n " $G setting up rootpassword ..success$N"
+#else 
+#   echo -e " $Y mysql service already installed$N"
+#fi
