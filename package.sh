@@ -5,7 +5,7 @@ USERID=$(id -u)
 LOGDIR="/var/log"
 LOGNAME="$(echo $0 |awk -F. '{print $1}')"
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
-LOGFILE="$LOGDIR/$LOGNAME-$TIMESTAMP.log"
+LOGFILE="$LOGDIR/$LOGNAME-$TIMESTAMP-pkg.log"
 
 R="\e[31m"
 G="\e[32m"
