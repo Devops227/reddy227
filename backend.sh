@@ -5,7 +5,7 @@ USERID=$(id -u)
 LOGDIR="/var/log"
 LOGNAME="$(echo $0 |awk -F. '{print $1}')"
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
-LOGFILE="$LOGDIR/$LOGNAME-$TIMESTAMP-pkg.log"
+LOGFILE="$LOGDIR/$LOGNAME-$TIMESTAMP-backend.log"
 
 R="\e[31m"
 G="\e[32m"
@@ -34,9 +34,9 @@ echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 
 CHECKROOT
 
-dnf module disable nodejs -y
-dnf module enable nodejs:20 -y
-dnf list installed nodejs
+dnf module disable nodejs -y &>>LOGFILE
+dnf module enable nodejs:20 -y &>>LOGFILE
+dnf list installed nodejs  &>>LOGFILE
 if [ $? -ne 0 ]
 then
    dnf install nodejs -y &>>LOGFILE
