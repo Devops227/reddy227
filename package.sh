@@ -49,6 +49,7 @@ then
        exit 1
     else 
        mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    fi   
 else
     echo -e "Package is already $Y installed$N"
 fi
