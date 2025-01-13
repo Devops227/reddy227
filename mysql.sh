@@ -44,16 +44,16 @@ CHECKROOT
     systemctl start mysqld  &>>$LOGFILE
     VALIDATION $? "Starting mysql service service"
     
-    mysql -h 172.31.95.236 -u root -pExpenseApp@1 -e 'show databases;'  
-    
+    #mysql -h 172.31.95.236 -u root -pExpenseApp@1 -e 'show databases;'
+    mysql_secure_installation --set-root-passExpenseApp@1 &>>$LOGFILE
     if [ $? -ne 0 ]
     then
-       echo -e " $Y root password is not setup$N" >>$LOGFILE
-       mysql_secure_installation --set-root-passExpenseApp@1  
-       VALIDATION $? "setting up root password"
+       echo -e " $Y root password is alredy setup$N...skipping"
+       exit 1
     else
-       echo -e " $Y root password is alredy setup$N"
-    fi   
+       echo -e " $G setting up password$N "
+    fi
+
 #else 
 #   echo -e " $Y mysql service already installed$N"
 #fi
