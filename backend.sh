@@ -58,7 +58,7 @@ unzip /tmp/backend.zip &>>LOGFILE
       echo -e "$R issue with curl download$N"
       exit 1
    else
-      echo -e "$G downloading zip file$N"
+      echo -e "$G unziping file$N"
    fi
 cd /app
 npm install &>>LOGFILE
