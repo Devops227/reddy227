@@ -36,21 +36,18 @@ echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 
 CHECKROOT
 
-dnf list installed nodejs >>$LOGFILE
+dnf list installed mysql-server &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    dnf install nodejs -y >>$LOGFILE
+    dnf install nodejs -y &>>$LOGFILE
     VALIDATION $? "Installing nodejs"
+    systemctl enable mysqld &>>$LOGFILE
+    systemctl start mysqld  &>>$LOGFILE
+    if [$? -ne 0]
+       echo "Service is not started ..$R failure$N" &>>$LOGFILE
+       exit 1
+    then 
+       mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 else
-    echo -e "Package is already $G installed$N"
+    echo -e "Package is already $Y installed$N"
 fi
-
-dnf list installed nginx >>$LOGFILE
-if [ $? -ne 0 ]
-then
-    dnf install nginx -y >>$LOGFILE
-    VALIDATION $? "Installing nginx"
-else
-    echo -e "Package is already $G installed$N"
-fi
-
