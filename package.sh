@@ -48,7 +48,7 @@ then
        echo "Service is not started ..$R failure$N" &>>$LOGFILE
        exit 1
     else 
-       mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+       mysql_secure_installation --set-root-passExpenseApp@1 &>>$LOGFILE
     fi   
 else
     echo -e "Package is already $Y installed$N"
