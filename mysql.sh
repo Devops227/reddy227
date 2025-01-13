@@ -45,5 +45,5 @@ then
     VALIDATION $? "Starting mysql service service"
     mysql_secure_installation --set-root-passExpenseApp@1 "setting up root password"
 else 
-   echo " $Y mysql service already installed"
+   echo -e " $Y mysql service already installed$N"
 fi
