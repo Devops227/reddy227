@@ -30,8 +30,6 @@ VALIDATION () {
     fi
 }
 
-
-
 echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 
 CHECKROOT
@@ -47,5 +45,5 @@ then
     VALIDATION $? "Starting mysql service service"
     mysql_secure_installation --set-root-passExpenseApp@1 "setting up root password"
 else 
-   echo " mysql service $Y already installed$N"
+   echo " $Y mysql service already installed"
 fi
