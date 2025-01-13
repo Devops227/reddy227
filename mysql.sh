@@ -46,10 +46,10 @@ CHECKROOT
     mysql_secure_installation --set-root-passExpenseApp@1 "setting up root password"
     if [ $? -ne 0 ]
     then
-       echo -n " $Y root password already configured$N"
+       echo -e " $Y root password already configured$N"
        exit 1 
     else 
-       echo -n " $G setting up rootpassword ..success$N"
+       echo -e " $G setting up rootpassword ..success$N"
     fi   
 #else 
 #   echo -e " $Y mysql service already installed$N"
