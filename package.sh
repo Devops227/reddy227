@@ -44,9 +44,10 @@ then
     systemctl enable mysqld &>>$LOGFILE
     systemctl start mysqld  &>>$LOGFILE
     if [ $? -ne 0 ]
+    then
        echo "Service is not started ..$R failure$N" &>>$LOGFILE
        exit 1
-    then 
+    else 
        mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 else
     echo -e "Package is already $Y installed$N"
