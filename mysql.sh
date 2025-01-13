@@ -49,6 +49,7 @@ CHECKROOT
        echo -n " $Y root password already configured$N"
     else 
        echo -n " $G setting up rootpassword ..success$N"
+    fi   
 #else 
 #   echo -e " $Y mysql service already installed$N"
 #fi
