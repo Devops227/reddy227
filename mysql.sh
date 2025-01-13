@@ -37,7 +37,7 @@ echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 CHECKROOT
 
 dnf list installed mysql-server &>>$LOGFILE
-if [ $? -nt 0 ]
+if [ $? -ne 0 ]
 then
     dnf install mysql-server -y &>>$LOGFILE
     VALIDATION $? "Installing mysql service"
