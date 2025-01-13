@@ -35,51 +35,42 @@ echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 CHECKROOT
 
 dnf module disable nodejs -y &>>LOGFILE
+VALIDATION $? "disabling nodejs"
 dnf module enable nodejs:20 -y &>>LOGFILE
+VALIDATION $? "enabling nodejs:20"
 dnf list installed nodejs  &>>LOGFILE
 if [ $? -ne 0 ]
 then
    dnf install nodejs -y &>>LOGFILE
    VALIDATION $? "installing nodejs"
    useradd expense
+   VALIDATION $? "adding user"
    mkdir /app
+   VALIDATION $? "aading dir"
    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>LOGFILE
-   if [ $? -ne 0 ]
-   then 
-      echo -e "$R issue with curl download$N"
-      exit 1
-   else
-      echo -e "$G downloading zip file$N"
-   fi
-cd /app
-unzip /tmp/backend.zip &>>LOGFILE
-   if [ $? -ne 0 ]
-   then 
-      echo -e "$R issue with curl download$N"
-      exit 1
-   else
-      echo -e "$G unziping file$N"
-   fi
-cd /app
-npm install &>>LOGFILE
-  if [ $? -ne 0 ]
-  then
-     echo -e "$R issue with npm install$N"
-     exit 1
-  else
-    echo -e "$G npm is installing..success$N"
-  fi
-cp /tmp/malla.sh /etc/systemd/system/backend.service
-systemctl daemon-reload &>>LOGFILE
-VALIDATION $? "daemon reloaning"
-systemctl start backend &>>LOGFILE
-VALIDATION $? "daemon starting"
-systemctl enable backend &>>LOGFILE
-VALIDATION $? "service enabling"
-dnf install mysql -y &>>LOGFILE
-VALIDATION $? "Installing mysql service"
-mysql -h 172.31.95.236 -uroot -pExpenseApp@1 < /app/schema/backend.sql
-VALIDATION $? "validating the access of root"
-systemctl restart backend &>>LOGFILE
-VALIDATION $? "reloading backend service"
+   VALIDATION $? "downloading zip"
+   cd /app
+   unzip /tmp/backend.zip &>>LOGFILE
+   VALIDATION $? "unziping backendfile" 
+   cd /app
+   npm install &>>LOGFILE
+   VALIDATION $? "install npm"
+   cp /tmp/malla.sh /etc/systemd/system/backend.service
+   dnf install mysql -y &>>LOGFILE
+   VALIDATION $? "installing mysql"
+   mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
+   VALIDATION $? "adding schema"
+   systemctl daemon-reload &>>LOGFILE
+   VALIDATION $? "reloading backendservice"
+   systemctl start backend &>>LOGFILE
+   VALIDATION $? "starting backend"
+   systemctl enable backend &>>LOGFILE
+   VALIDATION $? "enabling backend"
 fi
+
+
+ 
+      
+   
+   
+
