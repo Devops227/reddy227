@@ -47,6 +47,7 @@ CHECKROOT
     if [ $? -ne 0 ]
     then
        echo -n " $Y root password already configured$N"
+       exit 1 
     else 
        echo -n " $G setting up rootpassword ..success$N"
     fi   
