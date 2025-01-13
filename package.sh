@@ -43,7 +43,7 @@ then
     VALIDATION $? "Installing mysql"
     systemctl enable mysqld &>>$LOGFILE
     systemctl start mysqld  &>>$LOGFILE
-    if [$? -ne 0]
+    if [ $? -ne 0 ]
        echo "Service is not started ..$R failure$N" &>>$LOGFILE
        exit 1
     then 
