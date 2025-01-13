@@ -58,7 +58,7 @@ then
    cp /tmp/malla.sh /etc/systemd/system/backend.service
    dnf install mysql -y &>>LOGFILE
    VALIDATION $? "installing mysql"
-   mysql -h databaselocal.reddydevops.store -uroot -pExpenseApp@1 < /app/schema/backend.sql
+   mysql -h databaselocal.reddydevops.store -uroot -p'ExpenseApp@1' < /app/schema/backend.sql
    VALIDATION $? "adding schema"
    systemctl daemon-reload &>>LOGFILE
    VALIDATION $? "reloading backendservice"
