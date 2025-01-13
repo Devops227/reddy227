@@ -40,12 +40,12 @@ dnf list installed mysql-server &>>$LOGFILE
 if [ $? -nt 0 ]
 then
     dnf install mysql-server -y &>>$LOGFILE
-    VALIDATION $? "Installing mysql service .. $G success$N"
+    VALIDATION $? "Installing mysql service"
     systemctl enable mysqld &>>$LOGFILE
-    VALIDATION $? "Enabling mysql..$G success$N"
+    VALIDATION $? "Enabling mysql service"
     systemctl start mysqld  &>>$LOGFILE
-    VALIDATION $? "Starting mysql service ... $G success$N"
-    mysql_secure_installation --set-root-passExpenseApp@1 "setting up root password ...$G success$N "
+    VALIDATION $? "Starting mysql service service"
+    mysql_secure_installation --set-root-passExpenseApp@1 "setting up root password"
 else 
    echo " mysql service $Y already installed$N"
 fi
