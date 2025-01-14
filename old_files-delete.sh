@@ -2,6 +2,8 @@
 
 USERID=$(id -u)
 
+SOURCE_DIR="/root/reddy227"
+
 LOGDIR="/var/log"
 LOGNAME="$(echo $0 |awk -F. '{print $1}')"
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
@@ -32,11 +34,11 @@ VALIDATION () {
 
 echo "Script is started executing: $TIMESTAMP" >>$LOGFILE
 
-files_to_be-deleted=$(find . -name "*.log" -mtime +1)
-echo -e " $R files to be deleted :$files_to_be-deleted$N"
+F2D=$(find $SOURCE_DIR -name "*.log" -mtime +1)
+echo  "files to be deleted: $F2D"
 while read -r file
 do
- echo -e "$R deleting files:$file"
+ echo  "deleting files: $file"
  rm -rf $file
 
-done <<< $files_to_be-delete
+done <<< $F2D
